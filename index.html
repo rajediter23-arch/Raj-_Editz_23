@@ -97,8 +97,9 @@ footer{background:#111;padding:20px}
 <input id="name" type="text" placeholder="Your Name"><br>
 <input id="phone" type="number" placeholder="Mobile Number"><br>
 <select id="service">
-<option>Video Editing</option>
 <option>Photo Editing</option>
+<option>Video Editing</option>
+<option>AI Video Editing</option>
 </select><br>
 <textarea id="details" placeholder="Explain your work (video/photo details)"></textarea><br>
 <input type="file"><br>
@@ -136,7 +137,7 @@ footer{background:#111;padding:20px}
 <a class="whatsapp" href="https://wa.me/919752973541">Chat on WhatsApp</a>
 
 <script>
-let orderList = [];
+let orderList = JSON.parse(localStorage.getItem("orders")) || [];
 
 function scrollToOrder(){
  document.getElementById("order").scrollIntoView({behavior:"smooth"});
@@ -146,14 +147,24 @@ function saveOrder(){
  let name = document.getElementById("name").value;
  let phone = document.getElementById("phone").value;
  let service = document.getElementById("service").value;
+  let details = document.getElementById("details").value;
 
  let order = `👤 ${name} | 📱 ${phone} | 🎬 ${service}`;
+ orderList.push(order);
+ displayOrders();
+
+ // Open Google Drive link for file upload
+ window.open("https://drive.google.com/drive/folders/1GEW-qknIqW6iTa6KmV8i3wCEpkMy7fPw?usp=drive_link", "_blank");
+
+ alert("✅ Order Submitted! अब apni file Drive me upload karo.");
+
  orderList.push(order);
  displayOrders();
  alert("✅ Order Submitted Successfully!");
 }
 
 function displayOrders(){
+ localStorage.setItem("orders", JSON.stringify(orderList));
  let html="";
  orderList.forEach(o=>{
    html += `<p>${o}</p>`;
@@ -162,6 +173,7 @@ function displayOrders(){
 }
 
 function paymentDone(){
+   window.open("https://drive.google.com/drive/folders/1GEW-qknIqW6iTa6KmV8i3wCEpkMy7fPw?usp=drive_link", "_blank");
  alert("💸 Payment Submitted! We will verify soon.");
 }
 </script>
