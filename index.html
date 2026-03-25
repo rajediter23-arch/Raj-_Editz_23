@@ -3,180 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raj Editz - Pro Business</title>
+<title>Raj Editz</title>
 
-<style>
-body{margin:0;font-family:Arial;background:#000;color:#fff}
-header{padding:20px;text-align:center;background:#111}
-header h1{color:red}
-nav a{margin:10px;color:white;text-decoration:none}
+<link rel="stylesheet" href="style.css">
 
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(black,red)}
-.hero h1{font-size:50px}
-.hero button{padding:10px 20px;background:red;border:none;color:white}
-
-section{padding:60px 20px;text-align:center}
-
-.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
-.card{background:#111;padding:20px;border-radius:10px;width:220px;transition:0.4s}
-.card:hover{transform:translateY(-10px);background:red}
-
-input, textarea, select{
-width:80%;padding:10px;margin:10px;border-radius:5px;border:none
-}
-
-button{padding:10px 20px;background:red;border:none;color:white;cursor:pointer}
-
-.video iframe{width:80%;height:300px;border-radius:10px}
-
-.order-box{background:#111;padding:20px;border-radius:10px;display:inline-block}
-
-footer{background:#111;padding:20px}
-
-.whatsapp{position:fixed;bottom:20px;right:20px;background:green;color:white;padding:10px 15px;border-radius:50px;text-decoration:none}
-
-</style>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
 
+<!-- 🔥 NAVBAR -->
 <header>
-<h1>RAJ EDITZ</h1>
-<nav>
-<a href="#">Home</a>
-<a href="#services">Services</a>
-<a href="#order">Order</a>
-<a href="#dashboard">Orders</a>
-</nav>
+  <h1>RAJ EDITZ</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#services">Services</a>
+    <a href="#order">Order</a>
+    <a href="#payment">Payment</a>
+    <a href="#contact">Contact</a>
+    <a href="#admin">Admin</a>
+  </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-<h1>🔥 Professional Video & Photo Editing</h1>
-<p>High Quality Editing | Fast Delivery | Affordable Price</p>
-<p>Start your project today with Raj Editz 🚀</p>
-<button onclick="scrollToOrder()">Order Now</button>
+  <h1>🔥 Professional Video & Photo Editing</h1>
+  <p>Fast Delivery | Low Price | Best Quality</p>
+  <button onclick="scrollToOrder()">Order Now</button>
 </section>
 
+<!-- SERVICES -->
 <section id="services">
-<h2>💼 Our Services</h2>
-<div class="cards">
-<div class="card">🎬 Video Editing<br>Reels, Shorts, YouTube<br><b>₹49 - ₹199</b></div>
-<div class="card">🖼 Photo Editing<br>Thumbnail, Poster, DP<br><b>₹29 - ₹99</b></div>
-<div class="card">🤖 AI Video Editing<br>AI Reels, Effects, Voice<br><b>₹99 - ₹299</b></div>
-<div class="card">⚡ Fast Delivery<br>Same Day Delivery Available</div>
-<div class="card">🔥 Premium Quality<br>Professional Look Guaranteed</div>
-</div>
+  <h2>💼 Our Services</h2>
+
+  <div class="cards">
+    <div class="card">
+      🎬 Video Editing<br>
+      Reels, Shorts, YouTube<br>
+      <b>₹49 - ₹199</b>
+    </div>
+
+    <div class="card">
+      🖼 Photo Editing<br>
+      Poster, Thumbnail, DP<br>
+      <b>₹29 - ₹99</b>
+    </div>
+
+    <div class="card">
+      🤖 AI Editing<br>
+      AI Videos, Effects<br>
+      <b>₹99 - ₹299</b>
+    </div>
+  </div>
 </section>
+<section id="work">
+  <h2>🎬 My Work</h2>
 
-<section>
-<h2>💰 Why Choose Us</h2>
-<div class="cards">
-<div class="card">✔ 100+ Happy Clients</div>
-<div class="card">✔ Secure Payment</div>
-<div class="card">✔ 24/7 Support</div>
-<div class="card">✔ Affordable Price</div>
-</div>
+  <div class="gallery">
+
+    <video controls>
+      <source src="video1.mp4" type="video/mp4">
+       <source src="video3.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+      <source src="video 2.mp4" type="video/mp4">
+    </video>
+
+       <img src="poster2.png">
+       <img src="poster1.png">
+ 
+
+  </div>
 </section>
-
-<section class="video">
-<h2>🎬 Our Work Preview</h2>
-<p>Normal Editing Sample 👇</p>
-<iframe src="my one.mp4" allowfullscreen></iframe>
-<iframe src="lv_0_20260201163934 (1).mp4" allowfullscreen></iframe>
-
-<h2 style="margin-top:40px;">🤖 AI Video Sample</h2>
-<p>AI Generated Video Example 👇</p>
-<iframe src="gemini_generated_video_e3152158.mp4" allowfullscreen></iframe>
-<iframe src="op.mp4" allowfullscreen></iframe>
-</section>
-
+<!-- ORDER -->
 <section id="order">
-<h2>📩 Place Your Order</h2>
-<p>Fill details below and we will contact you quickly 👇</p>
-<div class="order-box">
-<input id="name" type="text" placeholder="Your Name"><br>
-<input id="phone" type="number" placeholder="Mobile Number"><br>
-<select id="service">
-<option>Photo Editing</option>
-<option>Video Editing</option>
-<option>AI Video Editing</option>
-</select><br>
-<textarea id="details" placeholder="Explain your work (video/photo details)"></textarea><br>
-<input type="file"><br>
-<button onclick="saveOrder()">Submit Order</button>
-</div>
+  <h2>📩 Place Order</h2>
+
+  <div class="box">
+    <input id="name" placeholder="Your Name"><br>
+    <input id="phone" placeholder="Mobile Number"><br>
+
+    <select id="service">
+      <option>Video Editing</option>
+      <option>Photo Editing</option>
+      <option>AI Editing</option>
+    </select><br>
+
+    <textarea id="details" placeholder="Explain your work"></textarea><br>
+
+    <button onclick="placeOrder()">Submit Order</button>
+  </div>
 </section>
 
-<section id="dashboard">
-<h2>📊 Orders Dashboard</h2>
-<p>Your submitted orders will appear here 👇</p>
-<div id="orders"></div>
+<!-- PAYMENT -->
+<section id="payment">
+  <h2>💰 Payment</h2>
+
+  <p>UPI ID: <b>9752973541@ptyes</b></p>
+
+  <button onclick="payNow()">💳 Pay Now</button>
+
+  <p>📸 Upload Screenshot</p>
+
+  <a href="https://drive.google.com/drive/folders/1YuGqZBn4ZE0NvPnbL7QBwS_qkIJYG2iA" target="_blank">
+    <button>📤 Upload Screenshot</button>
+  </a>
 </section>
 
-<section>
-<h2>💸 Payment</h2>
-<p>Pay using UPI below 👇</p>
-<p><b>UPI ID:</b> 9752973541@ptyes</p>
-<p>After payment, upload screenshot 👇</p>
-<input type="file"><br>
-<button onclick="paymentDone()">Submit Payment</button>
+<!-- CONTACT DETAILS -->
+<section id="contact">
+  <h2>📞 Contact Details</h2>
+
+  <p>📱 Phone: 9752973541</p>
+  <p>💬 WhatsApp: 24/7 Available</p>
+  <p>📸 Instagram: raj_editz_2303</p>
+
+  <a href="https://wa.me/919752973541" target="_blank">
+    <button>💬 Chat on WhatsApp</button>
+  </a>
 </section>
 
-<section>
-<h2>📞 Contact Us</h2>
-<p>📱 Phone: 9752973541</p>
-<p>📸 Instagram: raj_editz_2303</p>
-<p>💬 WhatsApp available 24/7</p>
+<!-- ADMIN -->
+<section id="admin">
+  <h2>🔐 Admin Panel</h2>
+
+  <input type="password" id="adminPass" placeholder="Password">
+  <button onclick="loginAdmin()">Login</button>
+
+  <div id="adminPanel" style="display:none;">
+    <h3>📊 Orders</h3>
+    <div id="adminOrders"></div>
+  </div>
+</section>
+<section id="track">
+  <h2>📦 Track Your Order</h2>
+
+  <input id="orderId" placeholder="Enter Order ID">
+  <button onclick="checkStatus()">Check Status</button>
+
+  <p id="statusResult"></p>
 </section>
 
+<!-- FOOTER -->
 <footer>
-<p>© 2026 Raj Editz | All Rights Reserved</p>
-<p>Designed with ❤️ for clients</p>
+  <p>© 2026 Raj Editz | All Rights Reserved</p>
+  <p>Designed by Raj Editz 💻</p>
 </footer>
 
-<a class="whatsapp" href="https://wa.me/919752973541">Chat on WhatsApp</a>
-
-<script>
-let orderList = JSON.parse(localStorage.getItem("orders")) || [];
-
-function scrollToOrder(){
- document.getElementById("order").scrollIntoView({behavior:"smooth"});
-}
-
-function saveOrder(){
- let name = document.getElementById("name").value;
- let phone = document.getElementById("phone").value;
- let service = document.getElementById("service").value;
-  let details = document.getElementById("details").value;
-
- let order = `👤 ${name} | 📱 ${phone} | 🎬 ${service}`;
- orderList.push(order);
- displayOrders();
-
- // Open Google Drive link for file upload
- window.open("https://drive.google.com/drive/folders/1YuGqZBn4ZE0NvPnbL7QBwS_qkIJYG2iA?usp=drive_link", "_blank");
-
- alert("✅ Order Submitted! अब apni file Drive me upload karo.");
-
- orderList.push(order);
- displayOrders();
- alert("✅ Order Submitted Successfully!");
-}
-
-function displayOrders(){
- localStorage.setItem("orders", JSON.stringify(orderList));
- let html="";
- orderList.forEach(o=>{
-   html += `<p>${o}</p>`;
- });
- document.getElementById("orders").innerHTML = html;
-}
-
-function paymentDone(){
-   window.open("https://drive.google.com/drive/folders/1YuGqZBn4ZE0NvPnbL7QBwS_qkIJYG2iA?usp=drive_link", "_blank");
- alert("💸 Payment Submitted! We will verify soon.");
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

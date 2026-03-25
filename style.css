@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+header {
+  background: #111;
+  padding: 15px;
+}
+
+header h1 {
+  color: red;
+}
+
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(black, red);
+}
+
+.box {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+input, textarea, select {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 10px 20px;
+  background: red;
+  border: none;
+  color: white;
+  margin: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darkred;
+}
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  margin: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: red;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  width: 220px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: red;
+  transform: scale(1.05);
+}
+
+footer {
+  background: #111;
+  padding: 20px;
+  margin-top: 40px;
+}
+#track {
+  margin-top: 40px;
+}
+
+#statusResult {
+  margin-top: 10px;
+  font-size: 18px;
+  color: yellow;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.gallery video,
+.gallery img {
+  width: 250px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.gallery video:hover,
+.gallery img:hover {
+  transform: scale(1.05);
+}
