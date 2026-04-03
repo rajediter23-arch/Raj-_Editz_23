@@ -1,158 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raj Editz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raj Editz - Professional Editing Services at Affordable Prices</title>
+  <meta name="description" content="Raj Editz offers professional video editing, photo editing, AI video editing, wedding card design, visiting card design, MS Word and Excel work starting from just ₹39. Fast delivery, WhatsApp ordering." />
+  <meta name="keywords" content="video editing, photo editing, AI editing, wedding card design, visiting card, MS Word, MS Excel, freelancer India, affordable editing" />
+  <meta property="og:title" content="Raj Editz - Professional Editing Services" />
+  <meta property="og:description" content="Professional editing and design services at unbeatable prices. Video editing from ₹79, Photo editing from ₹39. Order instantly via WhatsApp." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #05080f;
+      color: #f0f4ff;
+      overflow-x: hidden;
+    }
 
-<link rel="stylesheet" href="style.css">
+    /* ===== UTILITIES ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .glass {
+      background: rgba(10, 14, 26, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .neon-text { text-shadow: 0 0 18px rgba(0,212,255,0.7); }
+    .neon-text-purple { text-shadow: 0 0 18px rgba(139,92,246,0.7); }
+    .neon-border {
+      box-shadow: 0 0 12px rgba(0,212,255,0.15), inset 0 0 10px rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.25) !important;
+    }
+    .neon-border:hover {
+      box-shadow: 0 0 25px rgba(0,212,255,0.4), inset 0 0 15px rgba(0,212,255,0.15);
+      border-color: rgba(0,212,255,0.7) !important;
+    }
+    .grid-bg {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #00d4ff;
+      text-shadow: 0 0 14px rgba(0,212,255,0.6);
+      margin-bottom: 0.75rem;
+    }
+    .section-label.purple { color: #8b5cf6; text-shadow: 0 0 14px rgba(139,92,246,0.6); }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: #8a9cc0;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+    section { padding: 6rem 0; position: relative; overflow: hidden; }
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    /* ===== LOADING SCREEN ===== */
+    #loading {
+      position: fixed; inset: 0; z-index: 999;
+      background: #05080f;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loading.hidden { opacity: 0; visibility: hidden; }
+    .load-logo {
+      font-size: 3.5rem; font-weight: 900; letter-spacing: -0.04em;
+      text-shadow: 0 0 30px rgba(0,212,255,0.8);
+      animation: loadPulse 1.5s ease-in-out infinite;
+    }
+    .load-logo span { color: #00d4ff; }
+    .load-bar-wrap {
+      width: 180px; height: 3px; background: rgba(255,255,255,0.08);
+      border-radius: 99px; overflow: hidden; margin-top: 1.5rem;
+    }
+    .load-bar {
+      height: 100%; width: 0; border-radius: 99px;
+      background: linear-gradient(90deg, #00d4ff, #8b5cf6);
+      animation: loadBar 1.6s ease-in-out forwards;
+    }
+    .load-text {
+      font-size: 0.7rem; color: #5a6a8a; letter-spacing: 0.2em;
+      text-transform: uppercase; font-family: monospace; margin-top: 1rem;
+    }
+    @keyframes loadPulse {
+      0%,100% { opacity: 1; } 50% { opacity: 0.75; }
+    }
+    @keyframes loadBar {
+      0% { width: 0; } 100% { width: 100%; }
+    }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 1.5rem 0;
+      transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+    }
+    #navbar.scrolled {
+      background: rgba(5,8,15,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 1rem 0;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 2rem; font-weight: 900; letter-spacing: -0.04em;
+      text-decoration: none; color: #f0f4ff;
+      text-shadow: 0 0 14px rgba(0,212,255,0.5);
+    }
+    .nav-logo span { color: #00d4ff; }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: rgba(240,244,255,0.7);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #00d4ff; }
+    .btn-hire {
+      font-size: 0.875rem; font-weight: 600; padding: 0.55rem 1.3rem;
+      border-radius: 99px; border: none; cursor: pointer;
+      background: #00d4ff; color: #05080f;
+      box-shadow: 0 0 16px rgba(0,212,255,0.45);
+      transition: all 0.25s; text-decoration: none;
+    }
+    .btn-hire:hover { box-shadow: 0 0 28px rgba(0,212,255,0.7); transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: #f0f4ff; border-radius: 2px; transition: all 0.3s;
+    }
+    .mobile-nav {
+      display: none; flex-direction: column; align-items: center; gap: 1rem;
+      padding: 1.25rem 0; background: rgba(5,8,15,0.95);
+      backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 1rem; font-weight: 500; color: #f0f4ff; text-decoration: none;
+      padding: 0.5rem 0; transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: #00d4ff; }
+    .mobile-nav .btn-hire { margin-top: 0.25rem; }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding-top: 5rem;
+    }
+    .hero-blobs {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); opacity: 0.18;
+      animation: blobFloat 6s ease-in-out infinite;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #00d4ff; top: 10%; left: 15%; }
+    .blob-2 { width: 420px; height: 420px; background: #8b5cf6; bottom: 15%; right: 10%; animation-delay: -3s; }
+    .blob-3 { width: 300px; height: 300px; background: #ec4899; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -1.5s; }
+    @keyframes blobFloat {
+      0%,100% { transform: translate(0,0); }
+      33% { transform: translate(20px, -15px); }
+      66% { transform: translate(-10px, 10px); }
+    }
+    .blob-3 { animation: blobFloat3 6s ease-in-out infinite; }
+    @keyframes blobFloat3 {
+      0%,100% { transform: translate(-50%,-50%); }
+      50% { transform: translate(calc(-50% + 15px), calc(-50% - 10px)); }
+    }
+    .hero-badge {
+      display: inline-block; font-size: 0.8rem; font-weight: 600; color: #00d4ff;
+      padding: 0.4rem 1.1rem; border-radius: 99px; margin-bottom: 1.5rem;
+      background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25);
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900;
+      letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease 0.5s both;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem); color: #8a9cc0; max-width: 580px;
+      margin: 0 auto 2.5rem; line-height: 1.7;
+      animation: fadeUp 0.7s ease 0.7s both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.9s both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 2rem; border-radius: 99px; font-size: 1rem; font-weight: 700;
+      background: #00d4ff; color: #05080f; text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 0 24px rgba(0,212,255,0.55);
+      transition: all 0.25s;
+    }
+    .btn-primary:hover { box-shadow: 0 0 40px rgba(0,212,255,0.75); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 2rem; border-radius: 99px; font-size: 1rem; font-weight: 600;
+      background: rgba(255,255,255,0.05); color: #f0f4ff; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.35); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      color: rgba(0,212,255,0.5); cursor: pointer; animation: bounce 2s infinite;
+      font-size: 1.5rem;
+    }
+    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== SERVICES ===== */
+    #services { text-align: center; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      text-align: left;
+    }
+    .service-card {
+      background: rgba(10,14,26,0.7); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.25rem; padding: 1.5rem;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .svc-icon {
+      width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; font-size: 1.3rem;
+    }
+    .svc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+    .svc-title { font-size: 1rem; font-weight: 700; color: #f0f4ff; }
+    .svc-price { font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg,#00d4ff,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-left: 0.5rem; white-space: nowrap; }
+    .svc-desc { font-size: 0.85rem; color: #7a8aaa; margin-bottom: 1.25rem; flex: 1; line-height: 1.6; }
+    .svc-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      width: 100%; padding: 0.65rem 1rem; border-radius: 0.75rem;
+      font-size: 0.875rem; font-weight: 600; text-decoration: none; color: #f0f4ff;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.25s;
+    }
+    .svc-btn:hover {
+      background: #00d4ff; color: #05080f; border-color: #00d4ff;
+      box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    }
+
+    /* ===== PORTFOLIO ===== */
+    #portfolio { text-align: center; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; text-align: left; }
+    .portfolio-card {
+      border-radius: 1.25rem; overflow: hidden;
+      transition: transform 0.3s;
+      cursor: default;
+    }
+    .portfolio-card:hover { transform: translateY(-8px); }
+    .portfolio-thumb {
+      height: 200px; position: relative; display: flex;
+      align-items: center; justify-content: center; overflow: hidden;
+    }
+    .portfolio-thumb .thumb-label {
+      font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em;
+      position: relative; z-index: 2;
+    }
+    .portfolio-thumb .thumb-cat {
+      position: absolute; bottom: 1rem; left: 0; right: 0;
+      text-align: center; font-size: 0.7rem; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.15em; text-transform: uppercase; z-index: 2;
+    }
+    .portfolio-thumb .overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0); z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .portfolio-card:hover .overlay { background: rgba(0,0,0,0.65); }
+    .overlay-text {
+      color: #fff; font-size: 0.85rem; text-align: center; padding: 1rem;
+      opacity: 0; transition: opacity 0.3s; line-height: 1.5;
+    }
+    .portfolio-card:hover .overlay-text { opacity: 1; }
+    .portfolio-info {
+      background: rgba(10,14,26,0.75); border: 1px solid rgba(255,255,255,0.06);
+      border-top: none; padding: 1rem 1.25rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .portfolio-title { font-size: 0.95rem; font-weight: 700; color: #f0f4ff; }
+    .portfolio-tag {
+      font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 99px;
+      margin-top: 0.35rem; display: inline-block;
+    }
+    .portfolio-order { font-size: 0.75rem; color: #5a6a8a; text-decoration: none; margin-top: 0.25rem; transition: color 0.2s; white-space: nowrap; }
+    .portfolio-order:hover { color: #00d4ff; }
+
+    /* ===== ABOUT ===== */
+    #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .about-tag {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.8rem; padding: 0.4rem 0.85rem; border-radius: 99px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(240,244,255,0.8);
+    }
+    .about-tag .dot { width: 6px; height: 6px; background: #00d4ff; border-radius: 50%; }
+    .skill-row { margin-bottom: 1.1rem; }
+    .skill-meta { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.875rem; }
+    .skill-name { font-weight: 600; }
+    .skill-tools { color: #5a6a8a; font-size: 0.8rem; }
+    .skill-bar-bg { height: 6px; background: rgba(255,255,255,0.05); border-radius: 99px; overflow: hidden; }
+    .skill-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #00d4ff, #8b5cf6); width: 0; transition: width 1.2s ease; }
+    .badges-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .badge-card {
+      background: rgba(10,14,26,0.7); border: 1px solid rgba(0,212,255,0.2);
+      box-shadow: 0 0 12px rgba(0,212,255,0.1), inset 0 0 10px rgba(0,212,255,0.04);
+      border-radius: 1.25rem; padding: 1.5rem;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      transition: transform 0.25s;
+    }
+    .badge-card:hover { transform: scale(1.04); }
+    .badge-icon {
+      width: 3rem; height: 3rem; border-radius: 50%;
+      background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .badge-label { font-weight: 700; font-size: 0.95rem; }
+    .badge-desc { font-size: 0.78rem; color: #5a6a8a; }
+    .stat-card {
+      grid-column: span 2;
+      background: rgba(10,14,26,0.7); border: 1px solid rgba(0,212,255,0.2);
+      box-shadow: 0 0 12px rgba(0,212,255,0.1); border-radius: 1.25rem; padding: 1.75rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(139,92,246,0.05));
+    }
+    .stat-num { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg,#00d4ff,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; position: relative; z-index: 1; }
+    .stat-label { font-weight: 600; font-size: 1rem; position: relative; z-index: 1; }
+    .stat-sub { color: #5a6a8a; font-size: 0.825rem; position: relative; z-index: 1; }
+
+    /* ===== CONTACT ===== */
+    #contact .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 900px; margin: 0 auto; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem;
+      border-radius: 1rem; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none; transition: all 0.25s; margin-bottom: 0.75rem;
+    }
+    .contact-link:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.06); }
+    .contact-link.ig:hover { border-color: rgba(236,72,153,0.4); background: rgba(236,72,153,0.06); }
+    .contact-icon {
+      width: 3rem; height: 3rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .contact-icon.wa { background: rgba(34,197,94,0.12); }
+    .contact-icon.ig { background: rgba(236,72,153,0.12); }
+    .contact-name { font-weight: 700; color: #f0f4ff; transition: color 0.2s; }
+    .contact-link:hover .contact-name { color: #00d4ff; }
+    .contact-link.ig:hover .contact-name { color: #ec4899; }
+    .contact-val { font-size: 0.825rem; color: #5a6a8a; }
+    .online-dot { margin-left: auto; font-size: 0.7rem; color: #4ade80; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); padding: 0.2rem 0.6rem; border-radius: 99px; }
+    .response-card {
+      background: rgba(10,14,26,0.7); border: 1px solid rgba(0,212,255,0.2); border-radius: 1.25rem; padding: 1.5rem; text-align: center; margin-top: 0.75rem;
+    }
+    .response-label { font-size: 0.8rem; color: #00d4ff; font-weight: 600; margin-bottom: 0.4rem; text-shadow: 0 0 10px rgba(0,212,255,0.5); }
+    .response-val { font-size: 2.5rem; font-weight: 900; color: #f0f4ff; margin-bottom: 0.25rem; }
+    .response-sub { font-size: 0.8rem; color: #5a6a8a; }
+    .response-bar-wrap { height: 6px; background: rgba(255,255,255,0.05); border-radius: 99px; overflow: hidden; margin-top: 1rem; }
+    .response-bar { height: 100%; width: 90%; background: linear-gradient(90deg,#00d4ff,#8b5cf6); border-radius: 99px; }
+    .response-percent { font-size: 0.7rem; color: #5a6a8a; margin-top: 0.35rem; }
+    .form-box {
+      background: rgba(10,14,26,0.7); border: 1px solid rgba(0,212,255,0.2);
+      box-shadow: 0 0 12px rgba(0,212,255,0.1);
+      border-radius: 1.25rem; padding: 2rem;
+    }
+    .form-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .form-sub { font-size: 0.825rem; color: #5a6a8a; margin-bottom: 1.5rem; }
+    .form-field { position: relative; margin-bottom: 1rem; }
+    .form-field .icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: #5a6a8a; pointer-events: none; }
+    .form-field textarea ~ .icon { top: 1.1rem; transform: none; }
+    .form-field input, .form-field textarea {
+      width: 100%; padding: 0.8rem 1rem 0.8rem 2.6rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem; color: #f0f4ff; font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+      resize: none;
+    }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: #3a4a6a; }
+    .form-field input:focus, .form-field textarea:focus {
+      border-color: rgba(0,212,255,0.45);
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
+    }
+    .form-submit {
+      width: 100%; padding: 0.9rem; border-radius: 0.85rem; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-size: 0.95rem; font-weight: 700; background: #00d4ff; color: #05080f;
+      box-shadow: 0 0 20px rgba(0,212,255,0.45); transition: all 0.25s;
+    }
+    .form-submit:hover { box-shadow: 0 0 35px rgba(0,212,255,0.65); transform: translateY(-1px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+    .footer-logo { font-size: 1.6rem; font-weight: 900; text-shadow: 0 0 14px rgba(0,212,255,0.5); }
+    .footer-logo span { color: #00d4ff; }
+    .footer-tagline { font-size: 0.85rem; color: #5a6a8a; margin-top: 0.2rem; }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .footer-social a {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .footer-social a:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.1); }
+    .footer-social a.ig:hover { border-color: rgba(236,72,153,0.4); background: rgba(236,72,153,0.1); }
+    .footer-copy { font-size: 0.8rem; color: #3a4a6a; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; padding-top: 1.5rem; }
+
+    /* ===== FLOATING WA ===== */
+    #float-wa {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #22c55e;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; box-shadow: 0 0 24px rgba(34,197,94,0.6);
+      font-size: 1.5rem; transition: all 0.25s;
+      animation: waAppear 0.5s ease 2s both;
+    }
+    #float-wa:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(34,197,94,0.8); }
+    #float-wa .pulse {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: rgba(34,197,94,0.4);
+      animation: waPulse 2s ease-out infinite;
+    }
+    @keyframes waPulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.7); opacity: 0; } }
+    @keyframes waAppear { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+    /* ===== SCROLL TO TOP ===== */
+    #scroll-top {
+      position: fixed; bottom: 6rem; right: 1.5rem; z-index: 200;
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: rgba(10,14,26,0.8); border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; color: #5a6a8a;
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+      text-decoration: none;
+    }
+    #scroll-top.visible { opacity: 1; visibility: visible; }
+    #scroll-top:hover { border-color: rgba(0,212,255,0.5); box-shadow: 0 0 16px rgba(0,212,255,0.4); color: #00d4ff; }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links, .btn-hire { display: none; }
+      .nav-hamburger { display: flex; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      #contact .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .badges-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- 🔥 NAVBAR -->
-<header>
-  <h1>RAJ EDITZ</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#services">Services</a>
-    <a href="#order">Order</a>
-    <a href="#payment">Payment</a>
-    <a href="#contact">Contact</a>
-    <a href="#admin">Admin</a>
-  </nav>
+<!-- LOADING SCREEN -->
+<div id="loading">
+  <div class="load-logo">RAJ<span>EDITZ</span></div>
+  <div class="load-bar-wrap"><div class="load-bar"></div></div>
+  <div class="load-text">Initializing Studio</div>
+</div>
+
+<!-- NAVBAR -->
+<header id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">RAJ<span>EDITZ</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="https://wa.me/919752973541" target="_blank" class="btn-hire">Hire Me</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav">
+      <a href="#home" onclick="closeMobile()">Home</a>
+      <a href="#services" onclick="closeMobile()">Services</a>
+      <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="https://wa.me/919752973541" target="_blank" class="btn-hire">Hire Me</a>
+    </nav>
+  </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>🔥 Professional Video & Photo Editing</h1>
-  <p>Fast Delivery | Low Price | Best Quality</p>
-  <button onclick="scrollToOrder()">Order Now</button>
+<section id="home">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="grid-bg" style="position:absolute;inset:0;opacity:0.3;pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="hero-badge">❣ Har Har Mahadev ❣</div>
+    <h1 class="hero-title">
+      Creative<br>
+      <span class="gradient-text">Editing Studio</span>
+    </h1>
+    <p class="hero-sub">Professional Editing Services at Affordable Prices. Fast delivery, premium quality, unmatched rates.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20discuss%20a%20project." target="_blank" class="btn-primary">
+        💬 Order Now on WhatsApp
+      </a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">▼</div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <h2>💼 Our Services</h2>
-
-  <div class="cards">
-    <div class="card">
-      🎬 Video Editing<br>
-      Reels, Shorts, YouTube<br>
-      <b>₹49 - ₹199</b>
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label">What I Offer</span>
+      <h2 class="section-title">Services &amp; <span class="gradient-text">Pricing</span></h2>
+      <p class="section-sub">Professional quality at prices that fit every budget. Order instantly via WhatsApp.</p>
     </div>
-
-    <div class="card">
-      🖼 Photo Editing<br>
-      Poster, Thumbnail, DP<br>
-      <b>₹29 - ₹99</b>
-    </div>
-
-    <div class="card">
-      🤖 AI Editing<br>
-      AI Videos, Effects<br>
-      <b>₹99 - ₹299</b>
+    <div class="services-grid">
+      <div class="service-card reveal" style="--glow:rgba(0,212,255,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#06b6d4,#2563eb);">🎬</div>
+        <div class="svc-header"><div class="svc-title">Video Editing</div><div class="svc-price">₹79</div></div>
+        <p class="svc-desc">Professional video cuts, transitions, color grading and effects using CapCut &amp; VN.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20Video%20Editing" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(139,92,246,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#7c3aed,#9333ea);">🖼️</div>
+        <div class="svc-header"><div class="svc-title">Photo Editing</div><div class="svc-price">₹39</div></div>
+        <p class="svc-desc">Retouching, background removal, color correction and creative enhancements.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20Photo%20Editing" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(236,72,153,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#db2777,#e11d48);">✨</div>
+        <div class="svc-header"><div class="svc-title">AI Video Editing</div><div class="svc-price">₹149</div></div>
+        <p class="svc-desc">Next-level AI-powered video creation with smart cuts, auto-captions and effects.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20AI%20Video%20Editing" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(244,63,94,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#f43f5e,#db2777);">💍</div>
+        <div class="svc-header"><div class="svc-title">Wedding Card Design</div><div class="svc-price">₹99</div></div>
+        <p class="svc-desc">Beautiful, custom wedding invitation cards designed with love and elegance.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20Wedding%20Card%20Design" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(245,158,11,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#f59e0b,#ea580c);">💳</div>
+        <div class="svc-header"><div class="svc-title">Visiting Card Design</div><div class="svc-price">₹79</div></div>
+        <p class="svc-desc">Clean, professional business cards that make a lasting first impression.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20Visiting%20Card%20Design" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(59,130,246,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">📄</div>
+        <div class="svc-header"><div class="svc-title">MS Word Work</div><div class="svc-price">₹89</div></div>
+        <p class="svc-desc">Formatting, reports, resumes, assignments — professionally crafted in Word.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20MS%20Word%20Work" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
+      <div class="service-card reveal" style="--glow:rgba(16,185,129,0.45);" onmouseenter="this.style.boxShadow='0 0 30px var(--glow)'" onmouseleave="this.style.boxShadow=''">
+        <div class="svc-icon" style="background:linear-gradient(135deg,#10b981,#059669);">📊</div>
+        <div class="svc-header"><div class="svc-title">MS Excel Work</div><div class="svc-price">₹99</div></div>
+        <p class="svc-desc">Data entry, formulas, charts, spreadsheets and analysis work done fast.</p>
+        <a href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20order%20MS%20Excel%20Work" target="_blank" class="svc-btn">💬 Order Now</a>
+      </div>
     </div>
   </div>
 </section>
-<section id="work">
-  <h2>🎬 My Work</h2>
 
-  <div class="gallery">
-
-    <video controls>
-      <source src="video1.mp4" type="video/mp4">
-       <source src="video3.mp4" type="video/mp4">
-    </video>
-
-    <video controls>
-      <source src="video 2.mp4" type="video/mp4">
-    </video>
-
-       <img src="poster2.png">
-       <img src="poster1.png">
- 
-
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label purple">My Work</span>
+      <h2 class="section-title">Recent <span class="gradient-text">Portfolio</span></h2>
+      <p class="section-sub">A glimpse into the kind of work I deliver — fast, clean, and professional.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#4a0080,#db2777);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#ff6b9d;text-shadow:0 0 20px #ff6b9d80;">WEDDING</div>
+          <div class="thumb-cat">Video Editing</div>
+          <div class="overlay"><div class="overlay-text">Cinematic wedding highlight reel with music sync and smooth transitions</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">Wedding Reel Edit</div>
+            <span class="portfolio-tag" style="color:#ff6b9d;background:rgba(255,107,157,0.1);border:1px solid rgba(255,107,157,0.25);">Video Editing</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20something%20similar%20to%20your%20Wedding%20Reel%20Edit." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#0a0a2e,#1e3a5f);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#00d4ff;text-shadow:0 0 20px #00d4ff80;">PHOTO</div>
+          <div class="thumb-cat">Photo Editing</div>
+          <div class="overlay"><div class="overlay-text">Product background removal and studio-quality color enhancement</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">Product Photo Retouch</div>
+            <span class="portfolio-tag" style="color:#00d4ff;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);">Photo Editing</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20Photo%20Editing%20similar%20to%20your%20Product%20Photo%20Retouch." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#2d0060,#4c1d95);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#a855f7;text-shadow:0 0 20px #a855f780;">AI EDIT</div>
+          <div class="thumb-cat">AI Video Editing</div>
+          <div> <video controls src="video 2.mp4"></video></div>
+          <div class="overlay"><div class="overlay-text">AI-powered style transfer with auto-captions and smart visual effects</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">AI Reel Transformation</div>
+            <span class="portfolio-tag" style="color:#a855f7;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);">AI Video Editing</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20AI%20Video%20Editing." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#4a1a00,#7c2d12);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#fb923c;text-shadow:0 0 20px #fb923c80;">CARD</div>
+          <div class="thumb-cat">Wedding Card Design</div>
+          <div class="overlay"><div class="overlay-text">Custom floral wedding invitation with premium calligraphy typography</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">Elegant Wedding Card</div>
+            <span class="portfolio-tag" style="color:#fb923c;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);">Wedding Card Design</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20a%20Wedding%20Card%20Design." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#022c22,#064e3b);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#34d399;text-shadow:0 0 20px #34d39980;">BIZ</div>
+          <div class="thumb-cat">Visiting Card Design</div>
+          <div class="overlay"><div class="overlay-text">Sleek minimalist business card that makes a strong first impression</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">Modern Business Card</div>
+            <span class="portfolio-tag" style="color:#34d399;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);">Visiting Card Design</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20a%20Visiting%20Card%20Design." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81);">
+          <div class="grid-bg" style="position:absolute;inset:0;opacity:0.2;"></div>
+          <div class="thumb-label" style="color:#818cf8;text-shadow:0 0 20px #818cf880;">REPORT</div>
+          <div class="thumb-cat">MS Word Work</div>
+          <div class="overlay"><div class="overlay-text">Professionally formatted multi-page business report with clean layout</div></div>
+        </div>
+        <div class="portfolio-info">
+          <div>
+            <div class="portfolio-title">Annual Report Layout</div>
+            <span class="portfolio-tag" style="color:#818cf8;background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.25);">MS Word Work</span>
+          </div>
+          <a href="https://wa.me/919752973541?text=Hi!%20I%20want%20MS%20Word%20Work." target="_blank" class="portfolio-order">Order Similar</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-<!-- ORDER -->
-<section id="order">
-  <h2>📩 Place Order</h2>
 
-  <div class="box">
-    <input id="name" placeholder="Your Name"><br>
-    <input id="phone" placeholder="Mobile Number"><br>
-
-    <select id="service">
-      <option>Video Editing</option>
-      <option>Photo Editing</option>
-      <option>AI Editing</option>
-    </select><br>
-
-    <textarea id="details" placeholder="Explain your work"></textarea><br>
-
-    <button onclick="placeOrder()">Submit Order</button>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <span class="section-label">About Me</span>
+        <h2 class="section-title">The Studio Behind <span class="gradient-text">Raj Editz</span></h2>
+        <p style="color:#8a9cc0;line-height:1.75;margin-bottom:1rem;">I am a passionate freelance editor and designer who believes that professional quality should not come with a huge price tag. Every project I take gets my full attention and creative energy.</p>
+        <p style="color:#8a9cc0;line-height:1.75;margin-bottom:1.75rem;">Whether it is a wedding reel that captures your best moments, a business card that opens doors, or an Excel sheet that tells your story in numbers — I deliver it fast, clean, and exactly as you imagined.</p>
+        <div class="about-tags">
+          <span class="about-tag"><span class="dot"></span>Fast Delivery</span>
+          <span class="about-tag"><span class="dot"></span>Affordable Rates</span>
+          <span class="about-tag"><span class="dot"></span>Revisions Included</span>
+          <span class="about-tag"><span class="dot"></span>WhatsApp Support</span>
+          <span class="about-tag"><span class="dot"></span>Privacy Assured</span>
+        </div>
+        <div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Video Editing</span><span class="skill-tools">CapCut, VN</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-width="95"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Photo Editing</span><span class="skill-tools">Lightroom, Snapseed</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-width="90"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">AI Editing</span><span class="skill-tools">AI Tools, Runway</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-width="88"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Graphic Design</span><span class="skill-tools">Canva, Adobe</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar" data-width="85"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="badges-grid reveal">
+        <div class="badge-card"><div class="badge-icon">⚡</div><div class="badge-label">Fast Delivery</div><div class="badge-desc">Same day or next day</div></div>
+        <div class="badge-card"><div class="badge-icon">💰</div><div class="badge-label">Best Prices</div><div class="badge-desc">Starting at just ₹39</div></div>
+        <div class="badge-card"><div class="badge-icon">⭐</div><div class="badge-label">Quality Work</div><div class="badge-desc">Premium output always</div></div>
+        <div class="badge-card"><div class="badge-icon">🕐</div><div class="badge-label">24/7 Available</div><div class="badge-desc">Always here for you</div></div>
+        <div class="stat-card">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Happy Customers</div>
+          <div class="stat-sub">Across India and beyond</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- PAYMENT -->
-<section id="payment">
-  <h2>💰 Payment</h2>
-
-  <p>UPI ID: <b>9752973541@ptyes</b></p>
-
-  <button onclick="payNow()">💳 Pay Now</button>
-
-  <p>📸 Upload Screenshot</p>
-
-  <a href="https://drive.google.com/drive/folders/1YuGqZBn4ZE0NvPnbL7QBwS_qkIJYG2iA" target="_blank">
-    <button>📤 Upload Screenshot</button>
-  </a>
-</section>
-
-<!-- CONTACT DETAILS -->
+<!-- CONTACT -->
 <section id="contact">
-  <h2>📞 Contact Details</h2>
-
-  <p>📱 Phone: 9752973541</p>
-  <p>💬 WhatsApp: 24/7 Available</p>
-  <p>📸 Instagram: raj_editz_2303</p>
-
-  <a href="https://wa.me/919752973541" target="_blank">
-    <button>💬 Chat on WhatsApp</button>
-  </a>
-</section>
-
-<!-- ADMIN -->
-<section id="admin">
-  <h2>🔐 Admin Panel</h2>
-
-  <input type="password" id="adminPass" placeholder="Password">
-  <button onclick="loginAdmin()">Login</button>
-
-  <div id="adminPanel" style="display:none;">
-    <h3>📊 Orders</h3>
-    <div id="adminOrders"></div>
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+      <p class="section-sub">Ready to order? Have a question? Reach out on WhatsApp for the fastest response.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <a href="https://wa.me/919752973541" target="_blank" class="contact-link">
+          <div class="contact-icon wa">💬</div>
+          <div><div class="contact-name">WhatsApp</div><div class="contact-val">+91 9752973541</div></div>
+          <span class="online-dot">Online</span>
+        </a>
+        <a href="https://www.instagram.com/raj_editz_2303" target="_blank" class="contact-link ig">
+          <div class="contact-icon ig">📸</div>
+          <div><div class="contact-name">Instagram</div><div class="contact-val">@raj_editz_2303</div></div>
+        </a>
+        <div class="response-card">
+          <div class="response-label">Response Time</div>
+          <div class="response-val">&lt; 30 min</div>
+          <div class="response-sub">Average reply on WhatsApp</div>
+          <div class="response-bar-wrap"><div class="response-bar"></div></div>
+          <div class="response-percent">90% response rate</div>
+        </div>
+      </div>
+      <div class="form-box reveal">
+        <div class="form-title">Send a Message</div>
+        <div class="form-sub">Fill the form and it will open WhatsApp with your message pre-filled.</div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-field">
+            <span class="icon">👤</span>
+            <input type="text" id="fname" placeholder="Your Name" required />
+          </div>
+          <div class="form-field">
+            <span class="icon">📱</span>
+            <input type="tel" id="fphone" placeholder="Your Phone Number" required />
+          </div>
+          <div class="form-field">
+            <span class="icon">💬</span>
+            <textarea id="fmsg" rows="4" placeholder="Describe your project..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">📲 Send via WhatsApp</button>
+        </form>
+      </div>
+    </div>
   </div>
-</section>
-<section id="track">
-  <h2>📦 Track Your Order</h2>
-
-  <input id="orderId" placeholder="Enter Order ID">
-  <button onclick="checkStatus()">Check Status</button>
-
-  <p id="statusResult"></p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Raj Editz | All Rights Reserved</p>
-  <p>Designed by Raj Editz 💻</p>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">RAJ<span>EDITZ</span></div>
+        <div class="footer-tagline">Professional Editing Services at Affordable Prices</div>
+      </div>
+      <div class="footer-social">
+        <a href="https://wa.me/919752973541" target="_blank" title="WhatsApp">💬</a>
+        <a href="https://www.instagram.com/raj_editz_2303" target="_blank" class="ig" title="Instagram">📸</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 Raj Editz. All rights reserved. &nbsp;|&nbsp; Made with ❤️ in India
+      </div>
+    </div>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<!-- FLOATING WHATSAPP -->
+<a id="float-wa" href="https://wa.me/919752973541?text=Hi%20Raj%20Editz!%20I%20want%20to%20place%20an%20order." target="_blank" title="Chat on WhatsApp">
+  <span class="pulse"></span>
+  💬
+</a>
 
+<!-- SCROLL TO TOP -->
+<a id="scroll-top" href="#home" title="Back to top">▲</a>
+
+<script>
+  // LOADING SCREEN
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('loading').classList.add('hidden');
+    }, 1800);
+  });
+
+  // NAVBAR SCROLL
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('navbar');
+    const scrollTop = document.getElementById('scroll-top');
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+      scrollTop.classList.add('visible');
+    } else {
+      nav.classList.remove('scrolled');
+      scrollTop.classList.remove('visible');
+    }
+  });
+
+  // HAMBURGER MENU
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobile-nav').classList.toggle('open');
+  });
+  function closeMobile() {
+    document.getElementById('mobile-nav').classList.remove('open');
+  }
+
+  // CONTACT FORM
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('fname').value;
+    const phone = document.getElementById('fphone').value;
+    const msg = document.getElementById('fmsg').value;
+    const text = encodeURIComponent('Hi Raj Editz! I am ' + name + '. Phone: ' + phone + '. ' + msg);
+    window.open('https://wa.me/919752973541?text=' + text, '_blank');
+  }
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate skill bars
+        entry.target.querySelectorAll('.skill-bar[data-width]').forEach(function(bar) {
+          bar.style.width = bar.getAttribute('data-width') + '%';
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(function(el) { observer.observe(el); });
+</script>
 </body>
 </html>
